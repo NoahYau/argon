@@ -478,7 +478,29 @@ blockquote {
 		}
 		html.darkmode #content:before{
 			filter: brightness(0.65);
-		}</style>
+		}
+					#content:after {
+				content: '';
+				display: block;
+				position: fixed;
+				left: 0;
+				right: 0;
+				top: 0;
+				bottom: 0;
+				z-index: -2;
+				background: url(https://imgur.com/BxpeXxX);
+				background-position: center;
+				background-size: cover;
+				background-repeat: no-repeat;
+				opacity: 0;
+				transition: opacity .5s ease;
+			}
+			html.darkmode #content:after {
+				opacity: 1;
+			}
+			html.darkmode #content:before {
+				opacity: 0;
+			}</style>
 
 
 <div id="float_action_buttons" class="float-action-buttons fabtns-unloaded">
@@ -589,7 +611,7 @@ blockquote {
 					<div class="tab-content" style="padding: 10px 10px 0 10px;">
 												<div class="tab-pane fade text-center active show" id="leftbar_tab_overview" role="tabpanel" aria-labelledby="leftbar_tab_overview_btn">
 							<a href="https://github.com/NoahYau">
-							<div id="leftbar_overview_author_image" style="background-image: url(https://noahyau.github.io/wp-content/uploads/2025/06/noah-profile.jpg)" class="rounded-circle shadow-sm" alt="avatar"></div>
+							<div id="leftbar_overview_author_image" style="background-image: url(https://imgur.com/j8ybiKY)" class="rounded-circle shadow-sm" alt="avatar"></div>
 							</a>
 							<h6 id="leftbar_overview_author_name">NoahQuQ</h6>
 														<nav class="site-state">
@@ -676,7 +698,7 @@ blockquote {
 					<time title="發布於 2025-6-01 17:29:56 | 編輯於 2025-6-01 17:29:57">2025-6-01 17:29
 					</time>
 				</div> <div class="post-meta-devide">|</div> <div class="post-meta-detail post-meta-detail-views">
-					<i class="fa fa-eye" aria-hidden="true"></i> 1</div> <div class="post-meta-devide">|</div> <div class="post-meta-detail post-meta-detail-comments">
+					<i class="fa fa-eye" aria-hidden="true"></i> 2</div> <div class="post-meta-devide">|</div> <div class="post-meta-detail post-meta-detail-comments">
 					<i class="fa fa-comments-o" aria-hidden="true"></i> 0</div> <div class="post-meta-devide">|</div> <div class="post-meta-detail post-meta-detail-categories">
 				<i class="fa fa-bookmark-o" aria-hidden="true"></i> <a href="https://noahyau.github.io/category/uncategorized/" target="_blank" class="post-meta-detail-catagory-link">未分類</a>
 </div>						<div class="post-meta-detail post-meta-detail-words">
@@ -702,7 +724,7 @@ blockquote {
 					<time title="發布於 2022-4-27 10:20:00 | 編輯於 2025-6-01 17:27:04">2022-4-27 10:20
 					</time>
 				</div> <div class="post-meta-devide">|</div> <div class="post-meta-detail post-meta-detail-views">
-					<i class="fa fa-eye" aria-hidden="true"></i> 0</div> <div class="post-meta-devide">|</div> <div class="post-meta-detail post-meta-detail-comments">
+					<i class="fa fa-eye" aria-hidden="true"></i> 1</div> <div class="post-meta-devide">|</div> <div class="post-meta-detail post-meta-detail-comments">
 					<i class="fa fa-comments-o" aria-hidden="true"></i> 0</div> <div class="post-meta-devide">|</div> <div class="post-meta-detail post-meta-detail-categories">
 				<i class="fa fa-bookmark-o" aria-hidden="true"></i> <a href="https://noahyau.github.io/category/uncategorized/" target="_blank" class="post-meta-detail-catagory-link">未分類</a>
 </div>						<div class="post-meta-detail post-meta-detail-words">
