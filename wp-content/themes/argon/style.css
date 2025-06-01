@@ -138,7 +138,7 @@ html.immersion-color body {
 	--color-widgets-disabled: rgb(var(--color-tint-86));
 	--color-border: rgb(var(--color-tint-78));
 	--color-border-on-foreground: rgb(var(--color-tint-86));
-	--color-border-on-foreground-deeper: rgb(var(--color-tint-80));
+/* 	--color-border-on-foreground-deeper: rgb(var(--color-tint-80)); */
 	--color-text-deeper: rgb(var(--color-shade-82));
 	--color-selection: rgb(var(--color-tint-70));
 }
