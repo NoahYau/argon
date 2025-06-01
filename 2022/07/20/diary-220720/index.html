@@ -705,7 +705,7 @@ blockquote {
 					<time title="發布於 2022-7-20 10:17:00 | 編輯於 2025-6-01 17:30:25">2022-7-20 10:17
 					</time>
 				</div> <div class="post-meta-devide">|</div> <div class="post-meta-detail post-meta-detail-views">
-					<i class="fa fa-eye" aria-hidden="true"></i> 17</div> <div class="post-meta-devide">|</div> <div class="post-meta-detail post-meta-detail-comments">
+					<i class="fa fa-eye" aria-hidden="true"></i> 19</div> <div class="post-meta-devide">|</div> <div class="post-meta-detail post-meta-detail-comments">
 					<i class="fa fa-comments-o" aria-hidden="true"></i> 0</div> <div class="post-meta-devide">|</div> <div class="post-meta-detail post-meta-detail-categories">
 				<i class="fa fa-bookmark-o" aria-hidden="true"></i> <a href="https://rona.eu.org/category/diary/" target="_blank" class="post-meta-detail-catagory-link">Diary</a>
 </div>			<div class="post-meta-detail post-meta-detail-words">
@@ -832,7 +832,255 @@ blockquote {
 		}
 		document.body.removeChild(input);
 	};</script>
-<div id="disqus_thread"></div>
+<div id="comments" class="comments-area card shadow-sm">
+	<div class="card-body">
+					<span>暫無評論</span>
+			</div>
+</div>
+
+
+<div id="post_comment" class="card shadow-sm  no-need-captcha">
+	<div class="card-body">
+		<h2 class="post-comment-title">
+			<i class="fa fa-commenting"></i>
+			<span class="hide-on-comment-editing">發怖評論</span>
+			<span class="hide-on-comment-not-editing">編輯評論</span>
+		</h2>
+		<div id="post_comment_reply_info" class="post-comment-reply" style="display: none;">
+			<span>正在回覆 <b><span id="post_comment_reply_name"></span></b> 的評論 :</span>
+			<div id="post_comment_reply_preview" class="post-comment-reply-preview"></div>
+			<button id="post_comment_reply_cancel" class="btn btn-outline-primary btn-sm">取消回覆</button>
+		</div>
+		<form>
+			<div class="row">
+				<div class="col-md-12">
+					<textarea id="post_comment_content" class="form-control form-control-alternative" placeholder="評論內容" name="comment" style="height: 80px;"></textarea>
+				</div>
+				<div class="col-md-12" style="height: 0;overflow: hidden;">
+					<pre id="post_comment_content_hidden" class=""></pre>
+				</div>
+			</div>
+						<div class="row hide-on-comment-editing" style="margin-bottom: -10px;">
+				<div class="col-md-6">
+					<div class="form-group">
+						<div class="input-group input-group-alternative mb-4">
+							<div class="input-group-prepend">
+								<span class="input-group-text"><i class="fa fa-user-circle"></i></span>
+							</div>
+							<input id="post_comment_name" class="form-control" placeholder="暱稱" type="text" name="author" value="">
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group">
+						<div class="input-group input-group-alternative mb-4">
+							<div class="input-group-prepend">
+								<span class="input-group-text"><i class="fa fa-envelope"></i></span>
+							</div>
+							<input id="post_comment_email" class="form-control" placeholder="電子信箱" type="email" name="email" value="">
+						</div>
+					</div>
+				</div>
+				<div class="d-none">
+					<div class="form-group">
+						<div class="input-group input-group-alternative mb-4 post-comment-captcha-container" captcha="5 * 7 = ">
+							<div class="input-group-prepend">
+								<span class="input-group-text"><i class="fa fa-key"></i></span>
+							</div>
+							<input id="post_comment_captcha" class="form-control" placeholder="驗證碼" type="text">
+							<style>.post-comment-captcha-container:before{
+									content: attr(captcha);
+								}</style>
+													</div>
+					</div>
+				</div>
+			</div>
+			<div class="row hide-on-comment-editing" id="post_comment_extra_input" style="display: none">
+				<div class="col-md-12" style="margin-bottom: -10px;">
+					<div class="form-group">
+						<div class="input-group input-group-alternative mb-4 post-comment-link-container">
+							<div class="input-group-prepend">
+								<span class="input-group-text"><i class="fa fa-link"></i></span>
+							</div>
+							<input id="post_comment_link" class="form-control" placeholder="網站" type="text" name="url" value="">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row hide-on-comment-editing " style="margin-top: 10px;">
+				<div class="col-md-12">
+					<button id="post_comment_toggle_extra_input" type="button" class="btn btn-icon btn-outline-primary btn-sm" tooltip-show-extra-field="展開附加欄位" tooltip-hide-extra-field="摺疊附加欄位">
+						<span class="btn-inner--icon"><i class="fa fa-angle-down"></i></span>
+					</button>
+				</div>
+</div>
+			<div class="row" style="margin-top: 5px; margin-bottom: 10px;">
+				<div class="col-md-12">
+											<div class="custom-control custom-checkbox comment-post-checkbox comment-post-use-markdown">
+							<input class="custom-control-input" id="comment_post_use_markdown" type="checkbox" checked>
+							<label class="custom-control-label" for="comment_post_use_markdown">Markdown</label>
+						</div>
+																				<button id="post_comment_send" class="btn btn-icon btn-primary comment-btn pull-right mr-0" type="button">
+						<span class="btn-inner--icon hide-on-comment-editing"><i class="fa fa-send"></i></span>
+						<span class="btn-inner--icon hide-on-comment-not-editing"><i class="fa fa-pencil"></i></span>
+						<span class="btn-inner--text hide-on-comment-editing" style="margin-right: 0;">傳送</span>
+						<span class="btn-inner--text hide-on-comment-not-editing" style="margin-right: 0;">編輯</span>
+					</button>
+					<button id="post_comment_edit_cancel" class="btn btn-icon btn-danger comment-btn pull-right hide-on-comment-not-editing" type="button" style="margin-right: 8px;">
+						<span class="btn-inner--icon"><i class="fa fa-close"></i></span>
+						<span class="btn-inner--text">取消</span>
+					</button>
+											<button id="comment_emotion_btn" class="btn btn-icon btn-primary pull-right" type="button" title="表情">
+							<i class="fa fa-smile-o" aria-hidden="true"></i>
+						</button>
+						<div id="emotion_keyboard" class="emotion-keyboard card shadow-sm bg-white">
+	<div class="emotion-keyboard-content">
+		<div class="emotion-group" index="0">
+<div class="emotion-item" text="|´・ω・)ノ" title="">|´・ω・)ノ</div>
+<div class="emotion-item" text="ヾ(≧∇≦*)ゝ" title="">ヾ(≧∇≦*)ゝ</div>
+<div class="emotion-item" text="(☆ω☆)" title="">(☆ω☆)</div>
+<div class="emotion-item" text="（╯‵□′）╯︵┴─┴" title="">（╯‵□′）╯︵┴─┴</div>
+<div class="emotion-item" text="￣﹃￣" title="">￣﹃￣</div>
+<div class="emotion-item" text="(/ω＼)" title="">(/ω＼)</div>
+<div class="emotion-item" text="∠( ᐛ 」∠)＿" title="">∠( ᐛ 」∠)＿</div>
+<div class="emotion-item" text="(๑•̀ㅁ•́ฅ)" title="">(๑•̀ㅁ•́ฅ)</div>
+<div class="emotion-item" text="→_→" title="">→_→</div>
+<div class="emotion-item" text="୧(๑•̀⌄•́๑)૭" title="">୧(๑•̀⌄•́๑)૭</div>
+<div class="emotion-item" text="٩(ˊᗜˋ*)و" title="">٩(ˊᗜˋ*)و</div>
+<div class="emotion-item" text="(ノ°ο°)ノ" title="">(ノ°ο°)ノ</div>
+<div class="emotion-item" text="(´இ皿இ｀)" title="">(´இ皿இ｀)</div>
+<div class="emotion-item" text="⌇●﹏●⌇" title="">⌇●﹏●⌇</div>
+<div class="emotion-item" text="(ฅ´ω`ฅ)" title="">(ฅ´ω`ฅ)</div>
+<div class="emotion-item" text="(╯°A°)╯︵○○○" title="">(╯°A°)╯︵○○○</div>
+<div class="emotion-item" text="φ(￣∇￣o)" title="">φ(￣∇￣o)</div>
+<div class="emotion-item" text="ヾ(´･ ･｀｡)ノ&quot;" title="">ヾ(´･ ･｀｡)ノ&quot;</div>
+<div class="emotion-item" text="( ง ᵒ̌皿ᵒ̌)ง⁼³₌₃" title="">( ง ᵒ̌皿ᵒ̌)ง⁼³₌₃</div>
+<div class="emotion-item" text="(ó﹏ò｡)" title="">(ó﹏ò｡)</div>
+<div class="emotion-item" text="Σ(っ °Д °;)っ" title="">Σ(っ °Д °;)っ</div>
+<div class="emotion-item" text="( ,,´･ω･)ﾉ&quot;(´っω･｀｡)" title="">( ,,´･ω･)ﾉ&quot;(´っω･｀｡)</div>
+<div class="emotion-item" text="╮(╯▽╰)╭" title="">╮(╯▽╰)╭</div>
+<div class="emotion-item" text="o(*////▽////*)q" title="">o(*////▽////*)q</div>
+<div class="emotion-item" text="＞﹏＜" title="">＞﹏＜</div>
+<div class="emotion-item" text="( ๑´•ω•) &quot;(ㆆᴗㆆ)" title="">( ๑´•ω•) &quot;(ㆆᴗㆆ)</div>
+</div>
+<div class="emotion-group d-none" index="1">
+<div class="emotion-item" text="😂" title="">😂</div>
+<div class="emotion-item" text="😀" title="">😀</div>
+<div class="emotion-item" text="😅" title="">😅</div>
+<div class="emotion-item" text="😊" title="">😊</div>
+<div class="emotion-item" text="🙂" title="">🙂</div>
+<div class="emotion-item" text="🙃" title="">🙃</div>
+<div class="emotion-item" text="😌" title="">😌</div>
+<div class="emotion-item" text="😍" title="">😍</div>
+<div class="emotion-item" text="😘" title="">😘</div>
+<div class="emotion-item" text="😜" title="">😜</div>
+<div class="emotion-item" text="😝" title="">😝</div>
+<div class="emotion-item" text="😏" title="">😏</div>
+<div class="emotion-item" text="😒" title="">😒</div>
+<div class="emotion-item" text="🙄" title="">🙄</div>
+<div class="emotion-item" text="😳" title="">😳</div>
+<div class="emotion-item" text="😡" title="">😡</div>
+<div class="emotion-item" text="😔" title="">😔</div>
+<div class="emotion-item" text="😫" title="">😫</div>
+<div class="emotion-item" text="😱" title="">😱</div>
+<div class="emotion-item" text="😭" title="">😭</div>
+<div class="emotion-item" text="💩" title="">💩</div>
+<div class="emotion-item" text="👻" title="">👻</div>
+<div class="emotion-item" text="🙌" title="">🙌</div>
+<div class="emotion-item" text="🖕" title="">🖕</div>
+<div class="emotion-item" text="👍" title="">👍</div>
+<div class="emotion-item" text="👫" title="">👫</div>
+<div class="emotion-item" text="👬" title="">👬</div>
+<div class="emotion-item" text="👭" title="">👭</div>
+<div class="emotion-item" text="🌚" title="">🌚</div>
+<div class="emotion-item" text="🌝" title="">🌝</div>
+<div class="emotion-item" text="🙈" title="">🙈</div>
+<div class="emotion-item" text="💊" title="">💊</div>
+<div class="emotion-item" text="😶" title="">😶</div>
+<div class="emotion-item" text="🙏" title="">🙏</div>
+<div class="emotion-item" text="🍦" title="">🍦</div>
+<div class="emotion-item" text="🍉" title="">🍉</div>
+<div class="emotion-item" text="😣" title="">😣</div>
+</div>
+<div class="emotion-group d-none" index="2">
+<div class="emotion-item emotion-item-sticker" code="dinosaur-shy" title=""><img class="lazyload" src="data:image/svg+xml;base64,PHN2ZyBjbGFzcz0iZW1vdGlvbi1sb2FkaW5nIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9Ii04IC04IDQwIDQwIiBzdHJva2U9IiM4ODgiIG9wYWNpdHk9Ii41IiB3aWR0aD0iNjAiIGhlaWdodD0iNjAiPgogIDxwYXRoIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSIxLjUiIGQ9Ik0xNC44MjggMTQuODI4YTQgNCAwIDAxLTUuNjU2IDBNOSAxMGguMDFNMTUgMTBoLjAxTTIxIDEyYTkgOSAwIDExLTE4IDAgOSA5IDAgMDExOCAweiIvPgo8L3N2Zz4=" data-original="https://rona.eu.org/wp-content/themes/argon/stickers/dinosaur/1.jpg"></div>
+<div class="emotion-item emotion-item-sticker" code="dinosaur-daze" title=""><img class="lazyload" src="data:image/svg+xml;base64,PHN2ZyBjbGFzcz0iZW1vdGlvbi1sb2FkaW5nIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9Ii04IC04IDQwIDQwIiBzdHJva2U9IiM4ODgiIG9wYWNpdHk9Ii41IiB3aWR0aD0iNjAiIGhlaWdodD0iNjAiPgogIDxwYXRoIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSIxLjUiIGQ9Ik0xNC44MjggMTQuODI4YTQgNCAwIDAxLTUuNjU2IDBNOSAxMGguMDFNMTUgMTBoLjAxTTIxIDEyYTkgOSAwIDExLTE4IDAgOSA5IDAgMDExOCAweiIvPgo8L3N2Zz4=" data-original="https://rona.eu.org/wp-content/themes/argon/stickers/dinosaur/2.jpg"></div>
+<div class="emotion-item emotion-item-sticker" code="dinosaur-sweat" title=""><img class="lazyload" src="data:image/svg+xml;base64,PHN2ZyBjbGFzcz0iZW1vdGlvbi1sb2FkaW5nIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9Ii04IC04IDQwIDQwIiBzdHJva2U9IiM4ODgiIG9wYWNpdHk9Ii41IiB3aWR0aD0iNjAiIGhlaWdodD0iNjAiPgogIDxwYXRoIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSIxLjUiIGQ9Ik0xNC44MjggMTQuODI4YTQgNCAwIDAxLTUuNjU2IDBNOSAxMGguMDFNMTUgMTBoLjAxTTIxIDEyYTkgOSAwIDExLTE4IDAgOSA5IDAgMDExOCAweiIvPgo8L3N2Zz4=" data-original="https://rona.eu.org/wp-content/themes/argon/stickers/dinosaur/3.jpg"></div>
+<div class="emotion-item emotion-item-sticker" code="dinosaur-proud" title=""><img class="lazyload" src="data:image/svg+xml;base64,PHN2ZyBjbGFzcz0iZW1vdGlvbi1sb2FkaW5nIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9Ii04IC04IDQwIDQwIiBzdHJva2U9IiM4ODgiIG9wYWNpdHk9Ii41IiB3aWR0aD0iNjAiIGhlaWdodD0iNjAiPgogIDxwYXRoIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSIxLjUiIGQ9Ik0xNC44MjggMTQuODI4YTQgNCAwIDAxLTUuNjU2IDBNOSAxMGguMDFNMTUgMTBoLjAxTTIxIDEyYTkgOSAwIDExLTE4IDAgOSA5IDAgMDExOCAweiIvPgo8L3N2Zz4=" data-original="https://rona.eu.org/wp-content/themes/argon/stickers/dinosaur/4.jpg"></div>
+<div class="emotion-item emotion-item-sticker" code="dinosaur-powerless" title=""><img class="lazyload" src="data:image/svg+xml;base64,PHN2ZyBjbGFzcz0iZW1vdGlvbi1sb2FkaW5nIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9Ii04IC04IDQwIDQwIiBzdHJva2U9IiM4ODgiIG9wYWNpdHk9Ii41IiB3aWR0aD0iNjAiIGhlaWdodD0iNjAiPgogIDxwYXRoIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSIxLjUiIGQ9Ik0xNC44MjggMTQuODI4YTQgNCAwIDAxLTUuNjU2IDBNOSAxMGguMDFNMTUgMTBoLjAxTTIxIDEyYTkgOSAwIDExLTE4IDAgOSA5IDAgMDExOCAweiIvPgo8L3N2Zz4=" data-original="https://rona.eu.org/wp-content/themes/argon/stickers/dinosaur/5.jpg"></div>
+<div class="emotion-item emotion-item-sticker" code="dinosaur-pouting" title=""><img class="lazyload" src="data:image/svg+xml;base64,PHN2ZyBjbGFzcz0iZW1vdGlvbi1sb2FkaW5nIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9Ii04IC04IDQwIDQwIiBzdHJva2U9IiM4ODgiIG9wYWNpdHk9Ii41IiB3aWR0aD0iNjAiIGhlaWdodD0iNjAiPgogIDxwYXRoIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSIxLjUiIGQ9Ik0xNC44MjggMTQuODI4YTQgNCAwIDAxLTUuNjU2IDBNOSAxMGguMDFNMTUgMTBoLjAxTTIxIDEyYTkgOSAwIDExLTE4IDAgOSA5IDAgMDExOCAweiIvPgo8L3N2Zz4=" data-original="https://rona.eu.org/wp-content/themes/argon/stickers/dinosaur/6.jpg"></div>
+<div class="emotion-item emotion-item-sticker" code="dinosaur-eating" title=""><img class="lazyload" src="data:image/svg+xml;base64,PHN2ZyBjbGFzcz0iZW1vdGlvbi1sb2FkaW5nIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9Ii04IC04IDQwIDQwIiBzdHJva2U9IiM4ODgiIG9wYWNpdHk9Ii41IiB3aWR0aD0iNjAiIGhlaWdodD0iNjAiPgogIDxwYXRoIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSIxLjUiIGQ9Ik0xNC44MjggMTQuODI4YTQgNCAwIDAxLTUuNjU2IDBNOSAxMGguMDFNMTUgMTBoLjAxTTIxIDEyYTkgOSAwIDExLTE4IDAgOSA5IDAgMDExOCAweiIvPgo8L3N2Zz4=" data-original="https://rona.eu.org/wp-content/themes/argon/stickers/dinosaur/7.jpg"></div>
+<div class="emotion-item emotion-item-sticker" code="dinosaur-ok" title=""><img class="lazyload" src="data:image/svg+xml;base64,PHN2ZyBjbGFzcz0iZW1vdGlvbi1sb2FkaW5nIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9Ii04IC04IDQwIDQwIiBzdHJva2U9IiM4ODgiIG9wYWNpdHk9Ii41IiB3aWR0aD0iNjAiIGhlaWdodD0iNjAiPgogIDxwYXRoIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSIxLjUiIGQ9Ik0xNC44MjggMTQuODI4YTQgNCAwIDAxLTUuNjU2IDBNOSAxMGguMDFNMTUgMTBoLjAxTTIxIDEyYTkgOSAwIDExLTE4IDAgOSA5IDAgMDExOCAweiIvPgo8L3N2Zz4=" data-original="https://rona.eu.org/wp-content/themes/argon/stickers/dinosaur/8.jpg"></div>
+<div class="emotion-item emotion-item-sticker" code="dinosaur-doubt" title=""><img class="lazyload" src="data:image/svg+xml;base64,PHN2ZyBjbGFzcz0iZW1vdGlvbi1sb2FkaW5nIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9Ii04IC04IDQwIDQwIiBzdHJva2U9IiM4ODgiIG9wYWNpdHk9Ii41IiB3aWR0aD0iNjAiIGhlaWdodD0iNjAiPgogIDxwYXRoIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSIxLjUiIGQ9Ik0xNC44MjggMTQuODI4YTQgNCAwIDAxLTUuNjU2IDBNOSAxMGguMDFNMTUgMTBoLjAxTTIxIDEyYTkgOSAwIDExLTE4IDAgOSA5IDAgMDExOCAweiIvPgo8L3N2Zz4=" data-original="https://rona.eu.org/wp-content/themes/argon/stickers/dinosaur/9.jpg"></div>
+<div class="emotion-item emotion-item-sticker" code="dinosaur-depressed" title=""><img class="lazyload" src="data:image/svg+xml;base64,PHN2ZyBjbGFzcz0iZW1vdGlvbi1sb2FkaW5nIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9Ii04IC04IDQwIDQwIiBzdHJva2U9IiM4ODgiIG9wYWNpdHk9Ii41IiB3aWR0aD0iNjAiIGhlaWdodD0iNjAiPgogIDxwYXRoIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSIxLjUiIGQ9Ik0xNC44MjggMTQuODI4YTQgNCAwIDAxLTUuNjU2IDBNOSAxMGguMDFNMTUgMTBoLjAxTTIxIDEyYTkgOSAwIDExLTE4IDAgOSA5IDAgMDExOCAweiIvPgo8L3N2Zz4=" data-original="https://rona.eu.org/wp-content/themes/argon/stickers/dinosaur/10.jpg"></div>
+<div class="emotion-item emotion-item-sticker" code="dinosaur-close-eyes" title=""><img class="lazyload" src="data:image/svg+xml;base64,PHN2ZyBjbGFzcz0iZW1vdGlvbi1sb2FkaW5nIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9Ii04IC04IDQwIDQwIiBzdHJva2U9IiM4ODgiIG9wYWNpdHk9Ii41IiB3aWR0aD0iNjAiIGhlaWdodD0iNjAiPgogIDxwYXRoIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSIxLjUiIGQ9Ik0xNC44MjggMTQuODI4YTQgNCAwIDAxLTUuNjU2IDBNOSAxMGguMDFNMTUgMTBoLjAxTTIxIDEyYTkgOSAwIDExLTE4IDAgOSA5IDAgMDExOCAweiIvPgo8L3N2Zz4=" data-original="https://rona.eu.org/wp-content/themes/argon/stickers/dinosaur/11.jpg"></div>
+<div class="emotion-item emotion-item-sticker" code="dinosaur-sleeping" title=""><img class="lazyload" src="data:image/svg+xml;base64,PHN2ZyBjbGFzcz0iZW1vdGlvbi1sb2FkaW5nIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9Ii04IC04IDQwIDQwIiBzdHJva2U9IiM4ODgiIG9wYWNpdHk9Ii41IiB3aWR0aD0iNjAiIGhlaWdodD0iNjAiPgogIDxwYXRoIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSIxLjUiIGQ9Ik0xNC44MjggMTQuODI4YTQgNCAwIDAxLTUuNjU2IDBNOSAxMGguMDFNMTUgMTBoLjAxTTIxIDEyYTkgOSAwIDExLTE4IDAgOSA5IDAgMDExOCAweiIvPgo8L3N2Zz4=" data-original="https://rona.eu.org/wp-content/themes/argon/stickers/dinosaur/12.jpg"></div>
+<div class="emotion-item emotion-item-sticker" code="dinosaur-puzzled" title=""><img class="lazyload" src="data:image/svg+xml;base64,PHN2ZyBjbGFzcz0iZW1vdGlvbi1sb2FkaW5nIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9Ii04IC04IDQwIDQwIiBzdHJva2U9IiM4ODgiIG9wYWNpdHk9Ii41IiB3aWR0aD0iNjAiIGhlaWdodD0iNjAiPgogIDxwYXRoIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSIxLjUiIGQ9Ik0xNC44MjggMTQuODI4YTQgNCAwIDAxLTUuNjU2IDBNOSAxMGguMDFNMTUgMTBoLjAxTTIxIDEyYTkgOSAwIDExLTE4IDAgOSA5IDAgMDExOCAweiIvPgo8L3N2Zz4=" data-original="https://rona.eu.org/wp-content/themes/argon/stickers/dinosaur/13.jpg"></div>
+<div class="emotion-item emotion-item-sticker" code="dinosaur-agree" title=""><img class="lazyload" src="data:image/svg+xml;base64,PHN2ZyBjbGFzcz0iZW1vdGlvbi1sb2FkaW5nIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9Ii04IC04IDQwIDQwIiBzdHJva2U9IiM4ODgiIG9wYWNpdHk9Ii41IiB3aWR0aD0iNjAiIGhlaWdodD0iNjAiPgogIDxwYXRoIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSIxLjUiIGQ9Ik0xNC44MjggMTQuODI4YTQgNCAwIDAxLTUuNjU2IDBNOSAxMGguMDFNMTUgMTBoLjAxTTIxIDEyYTkgOSAwIDExLTE4IDAgOSA5IDAgMDExOCAweiIvPgo8L3N2Zz4=" data-original="https://rona.eu.org/wp-content/themes/argon/stickers/dinosaur/14.jpg"></div>
+<div class="emotion-item emotion-item-sticker" code="dinosaur-crazy" title=""><img class="lazyload" src="data:image/svg+xml;base64,PHN2ZyBjbGFzcz0iZW1vdGlvbi1sb2FkaW5nIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9Ii04IC04IDQwIDQwIiBzdHJva2U9IiM4ODgiIG9wYWNpdHk9Ii41IiB3aWR0aD0iNjAiIGhlaWdodD0iNjAiPgogIDxwYXRoIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSIxLjUiIGQ9Ik0xNC44MjggMTQuODI4YTQgNCAwIDAxLTUuNjU2IDBNOSAxMGguMDFNMTUgMTBoLjAxTTIxIDEyYTkgOSAwIDExLTE4IDAgOSA5IDAgMDExOCAweiIvPgo8L3N2Zz4=" data-original="https://rona.eu.org/wp-content/themes/argon/stickers/dinosaur/15.jpg"></div>
+<div class="emotion-item emotion-item-sticker" code="dinosaur-angry" title=""><img class="lazyload" src="data:image/svg+xml;base64,PHN2ZyBjbGFzcz0iZW1vdGlvbi1sb2FkaW5nIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9Ii04IC04IDQwIDQwIiBzdHJva2U9IiM4ODgiIG9wYWNpdHk9Ii41IiB3aWR0aD0iNjAiIGhlaWdodD0iNjAiPgogIDxwYXRoIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSIxLjUiIGQ9Ik0xNC44MjggMTQuODI4YTQgNCAwIDAxLTUuNjU2IDBNOSAxMGguMDFNMTUgMTBoLjAxTTIxIDEyYTkgOSAwIDExLTE4IDAgOSA5IDAgMDExOCAweiIvPgo8L3N2Zz4=" data-original="https://rona.eu.org/wp-content/themes/argon/stickers/dinosaur/16.jpg"></div>
+</div>
+<div class="emotion-group d-none" index="3">
+<div class="emotion-item emotion-item-sticker" code="flower-flower" title=""><img class="lazyload" src="data:image/svg+xml;base64,PHN2ZyBjbGFzcz0iZW1vdGlvbi1sb2FkaW5nIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9Ii04IC04IDQwIDQwIiBzdHJva2U9IiM4ODgiIG9wYWNpdHk9Ii41IiB3aWR0aD0iNjAiIGhlaWdodD0iNjAiPgogIDxwYXRoIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSIxLjUiIGQ9Ik0xNC44MjggMTQuODI4YTQgNCAwIDAxLTUuNjU2IDBNOSAxMGguMDFNMTUgMTBoLjAxTTIxIDEyYTkgOSAwIDExLTE4IDAgOSA5IDAgMDExOCAweiIvPgo8L3N2Zz4=" data-original="https://rona.eu.org/wp-content/themes/argon/stickers/flower/1.jpg"></div>
+<div class="emotion-item emotion-item-sticker" code="flower-grass" title=""><img class="lazyload" src="data:image/svg+xml;base64,PHN2ZyBjbGFzcz0iZW1vdGlvbi1sb2FkaW5nIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9Ii04IC04IDQwIDQwIiBzdHJva2U9IiM4ODgiIG9wYWNpdHk9Ii41IiB3aWR0aD0iNjAiIGhlaWdodD0iNjAiPgogIDxwYXRoIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSIxLjUiIGQ9Ik0xNC44MjggMTQuODI4YTQgNCAwIDAxLTUuNjU2IDBNOSAxMGguMDFNMTUgMTBoLjAxTTIxIDEyYTkgOSAwIDExLTE4IDAgOSA5IDAgMDExOCAweiIvPgo8L3N2Zz4=" data-original="https://rona.eu.org/wp-content/themes/argon/stickers/flower/2.jpg"></div>
+<div class="emotion-item emotion-item-sticker" code="flower-leaf" title=""><img class="lazyload" src="data:image/svg+xml;base64,PHN2ZyBjbGFzcz0iZW1vdGlvbi1sb2FkaW5nIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9Ii04IC04IDQwIDQwIiBzdHJva2U9IiM4ODgiIG9wYWNpdHk9Ii41IiB3aWR0aD0iNjAiIGhlaWdodD0iNjAiPgogIDxwYXRoIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSIxLjUiIGQ9Ik0xNC44MjggMTQuODI4YTQgNCAwIDAxLTUuNjU2IDBNOSAxMGguMDFNMTUgMTBoLjAxTTIxIDEyYTkgOSAwIDExLTE4IDAgOSA5IDAgMDExOCAweiIvPgo8L3N2Zz4=" data-original="https://rona.eu.org/wp-content/themes/argon/stickers/flower/3.jpg"></div>
+<div class="emotion-item emotion-item-sticker" code="flower-star" title=""><img class="lazyload" src="data:image/svg+xml;base64,PHN2ZyBjbGFzcz0iZW1vdGlvbi1sb2FkaW5nIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9Ii04IC04IDQwIDQwIiBzdHJva2U9IiM4ODgiIG9wYWNpdHk9Ii41IiB3aWR0aD0iNjAiIGhlaWdodD0iNjAiPgogIDxwYXRoIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSIxLjUiIGQ9Ik0xNC44MjggMTQuODI4YTQgNCAwIDAxLTUuNjU2IDBNOSAxMGguMDFNMTUgMTBoLjAxTTIxIDEyYTkgOSAwIDExLTE4IDAgOSA5IDAgMDExOCAweiIvPgo8L3N2Zz4=" data-original="https://rona.eu.org/wp-content/themes/argon/stickers/flower/4.jpg"></div>
+<div class="emotion-item emotion-item-sticker" code="flower-sun" title=""><img class="lazyload" src="data:image/svg+xml;base64,PHN2ZyBjbGFzcz0iZW1vdGlvbi1sb2FkaW5nIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9Ii04IC04IDQwIDQwIiBzdHJva2U9IiM4ODgiIG9wYWNpdHk9Ii41IiB3aWR0aD0iNjAiIGhlaWdodD0iNjAiPgogIDxwYXRoIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSIxLjUiIGQ9Ik0xNC44MjggMTQuODI4YTQgNCAwIDAxLTUuNjU2IDBNOSAxMGguMDFNMTUgMTBoLjAxTTIxIDEyYTkgOSAwIDExLTE4IDAgOSA5IDAgMDExOCAweiIvPgo8L3N2Zz4=" data-original="https://rona.eu.org/wp-content/themes/argon/stickers/flower/5.jpg"></div>
+<div class="emotion-item emotion-item-sticker" code="flower-moon" title=""><img class="lazyload" src="data:image/svg+xml;base64,PHN2ZyBjbGFzcz0iZW1vdGlvbi1sb2FkaW5nIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9Ii04IC04IDQwIDQwIiBzdHJva2U9IiM4ODgiIG9wYWNpdHk9Ii41IiB3aWR0aD0iNjAiIGhlaWdodD0iNjAiPgogIDxwYXRoIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSIxLjUiIGQ9Ik0xNC44MjggMTQuODI4YTQgNCAwIDAxLTUuNjU2IDBNOSAxMGguMDFNMTUgMTBoLjAxTTIxIDEyYTkgOSAwIDExLTE4IDAgOSA5IDAgMDExOCAweiIvPgo8L3N2Zz4=" data-original="https://rona.eu.org/wp-content/themes/argon/stickers/flower/6.jpg"></div>
+<div class="emotion-item emotion-item-sticker" code="flower-water" title=""><img class="lazyload" src="data:image/svg+xml;base64,PHN2ZyBjbGFzcz0iZW1vdGlvbi1sb2FkaW5nIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9Ii04IC04IDQwIDQwIiBzdHJva2U9IiM4ODgiIG9wYWNpdHk9Ii41IiB3aWR0aD0iNjAiIGhlaWdodD0iNjAiPgogIDxwYXRoIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSIxLjUiIGQ9Ik0xNC44MjggMTQuODI4YTQgNCAwIDAxLTUuNjU2IDBNOSAxMGguMDFNMTUgMTBoLjAxTTIxIDEyYTkgOSAwIDExLTE4IDAgOSA5IDAgMDExOCAweiIvPgo8L3N2Zz4=" data-original="https://rona.eu.org/wp-content/themes/argon/stickers/flower/7.jpg"></div>
+<div class="emotion-item emotion-item-sticker" code="flower-heihei" title=""><img class="lazyload" src="data:image/svg+xml;base64,PHN2ZyBjbGFzcz0iZW1vdGlvbi1sb2FkaW5nIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9Ii04IC04IDQwIDQwIiBzdHJva2U9IiM4ODgiIG9wYWNpdHk9Ii41IiB3aWR0aD0iNjAiIGhlaWdodD0iNjAiPgogIDxwYXRoIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSIxLjUiIGQ9Ik0xNC44MjggMTQuODI4YTQgNCAwIDAxLTUuNjU2IDBNOSAxMGguMDFNMTUgMTBoLjAxTTIxIDEyYTkgOSAwIDExLTE4IDAgOSA5IDAgMDExOCAweiIvPgo8L3N2Zz4=" data-original="https://rona.eu.org/wp-content/themes/argon/stickers/flower/8.jpg"></div>
+<div class="emotion-item emotion-item-sticker" code="flower-lemon" title=""><img class="lazyload" src="data:image/svg+xml;base64,PHN2ZyBjbGFzcz0iZW1vdGlvbi1sb2FkaW5nIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9Ii04IC04IDQwIDQwIiBzdHJva2U9IiM4ODgiIG9wYWNpdHk9Ii41IiB3aWR0aD0iNjAiIGhlaWdodD0iNjAiPgogIDxwYXRoIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSIxLjUiIGQ9Ik0xNC44MjggMTQuODI4YTQgNCAwIDAxLTUuNjU2IDBNOSAxMGguMDFNMTUgMTBoLjAxTTIxIDEyYTkgOSAwIDExLTE4IDAgOSA5IDAgMDExOCAweiIvPgo8L3N2Zz4=" data-original="https://rona.eu.org/wp-content/themes/argon/stickers/flower/9.jpg"></div>
+<div class="emotion-item emotion-item-sticker" code="flower-birthday" title=""><img class="lazyload" src="data:image/svg+xml;base64,PHN2ZyBjbGFzcz0iZW1vdGlvbi1sb2FkaW5nIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9Ii04IC04IDQwIDQwIiBzdHJva2U9IiM4ODgiIG9wYWNpdHk9Ii41IiB3aWR0aD0iNjAiIGhlaWdodD0iNjAiPgogIDxwYXRoIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSIxLjUiIGQ9Ik0xNC44MjggMTQuODI4YTQgNCAwIDAxLTUuNjU2IDBNOSAxMGguMDFNMTUgMTBoLjAxTTIxIDEyYTkgOSAwIDExLTE4IDAgOSA5IDAgMDExOCAweiIvPgo8L3N2Zz4=" data-original="https://rona.eu.org/wp-content/themes/argon/stickers/flower/10.jpg"></div>
+<div class="emotion-item emotion-item-sticker" code="flower-sea" title=""><img class="lazyload" src="data:image/svg+xml;base64,PHN2ZyBjbGFzcz0iZW1vdGlvbi1sb2FkaW5nIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9Ii04IC04IDQwIDQwIiBzdHJva2U9IiM4ODgiIG9wYWNpdHk9Ii41IiB3aWR0aD0iNjAiIGhlaWdodD0iNjAiPgogIDxwYXRoIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSIxLjUiIGQ9Ik0xNC44MjggMTQuODI4YTQgNCAwIDAxLTUuNjU2IDBNOSAxMGguMDFNMTUgMTBoLjAxTTIxIDEyYTkgOSAwIDExLTE4IDAgOSA5IDAgMDExOCAweiIvPgo8L3N2Zz4=" data-original="https://rona.eu.org/wp-content/themes/argon/stickers/flower/11.jpg"></div>
+<div class="emotion-item emotion-item-sticker" code="flower-vegetable" title=""><img class="lazyload" src="data:image/svg+xml;base64,PHN2ZyBjbGFzcz0iZW1vdGlvbi1sb2FkaW5nIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9Ii04IC04IDQwIDQwIiBzdHJva2U9IiM4ODgiIG9wYWNpdHk9Ii41IiB3aWR0aD0iNjAiIGhlaWdodD0iNjAiPgogIDxwYXRoIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSIxLjUiIGQ9Ik0xNC44MjggMTQuODI4YTQgNCAwIDAxLTUuNjU2IDBNOSAxMGguMDFNMTUgMTBoLjAxTTIxIDEyYTkgOSAwIDExLTE4IDAgOSA5IDAgMDExOCAweiIvPgo8L3N2Zz4=" data-original="https://rona.eu.org/wp-content/themes/argon/stickers/flower/12.jpg"></div>
+<div class="emotion-item emotion-item-sticker" code="flower-tile" title=""><img class="lazyload" src="data:image/svg+xml;base64,PHN2ZyBjbGFzcz0iZW1vdGlvbi1sb2FkaW5nIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9Ii04IC04IDQwIDQwIiBzdHJva2U9IiM4ODgiIG9wYWNpdHk9Ii41IiB3aWR0aD0iNjAiIGhlaWdodD0iNjAiPgogIDxwYXRoIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSIxLjUiIGQ9Ik0xNC44MjggMTQuODI4YTQgNCAwIDAxLTUuNjU2IDBNOSAxMGguMDFNMTUgMTBoLjAxTTIxIDEyYTkgOSAwIDExLTE4IDAgOSA5IDAgMDExOCAweiIvPgo8L3N2Zz4=" data-original="https://rona.eu.org/wp-content/themes/argon/stickers/flower/13.jpg"></div>
+<div class="emotion-item emotion-item-sticker" code="flower-utf" title=""><img class="lazyload" src="data:image/svg+xml;base64,PHN2ZyBjbGFzcz0iZW1vdGlvbi1sb2FkaW5nIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9Ii04IC04IDQwIDQwIiBzdHJva2U9IiM4ODgiIG9wYWNpdHk9Ii41IiB3aWR0aD0iNjAiIGhlaWdodD0iNjAiPgogIDxwYXRoIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSIxLjUiIGQ9Ik0xNC44MjggMTQuODI4YTQgNCAwIDAxLTUuNjU2IDBNOSAxMGguMDFNMTUgMTBoLjAxTTIxIDEyYTkgOSAwIDExLTE4IDAgOSA5IDAgMDExOCAweiIvPgo8L3N2Zz4=" data-original="https://rona.eu.org/wp-content/themes/argon/stickers/flower/14.jpg"></div>
+<div class="emotion-group-description">Source: github.com/k4yt3x/flowerhd</div>
+</div>	</div>
+	<div class="emotion-keyboard-bar">
+		<div class="emotion-group-name active" index="0">颜文字</div>
+<div class="emotion-group-name" index="1">Emoji</div>
+<div class="emotion-group-name" index="2">小恐龙</div>
+<div class="emotion-group-name" index="3">花!</div>	</div>
+</div>									</div>
+			</div>
+			<input id="post_comment_captcha_seed" value="<br />
+<b>Warning</b>:  Undefined variable $commentCaptchaSeed in <b>C:\Users\Noah Yau\Documents\xampp_wordpress\htdocs\myblog\wp-content\themes\argon\comments.php</b> on line <b>231</b><br />
+" style="display: none;">
+			<input id="post_comment_post_id" value="100" style="display: none;">
+		</form>
+	</div>
+</div>
+<div id="comment_edit_history" class="modal fade" tabindex="-1" role="dialog" aria-modal="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title" style="font-size: 20px;"></h4>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">×</span>
+				</button>
+			</div>
+			<div class="modal-body" style="word-break: break-word;"></div>
+		</div>
+	</div>
+</div>
+<div id="comment_pin_comfirm_dialog" class="modal fade" tabindex="-1" role="dialog" aria-modal="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title" style="font-size: 20px;"></h4>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">×</span>
+				</button>
+			</div>
+			<div class="modal-body" style="word-break: break-word;"></div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary btn-dismiss" data-dismiss="modal"></button>
+				<button type="button" class="btn btn-primary btn-comfirm"></button>
+			</div>
+		</div>
+	</div>
+</div>
 <div class="post-navigation card shadow-sm">
 <div class="post-navigation-item post-navigation-pre">
 <span class="page-navigation-extra-text"><i class="fa fa-arrow-circle-o-left" aria-hidden="true"></i>上一篇</span><a href="https://rona.eu.org/2022/04/30/diary-220430/" rel="prev">diary-220430</a>
@@ -863,7 +1111,8 @@ blockquote {
 </div>
 </div>
 					<footer id="footer" class="site-footer card shadow-sm border-0">
-						   <div class="github-badge-big">
+						<script src="https://utteranc.es/client.js" repo="NoahYau/argon" issue-term="pathname" theme="github-dark" crossorigin="anonymous" async></script>
+   <div class="github-badge-big">
         <a href="https://icp.gov.moe/?keyword=20251104" target="_blank">萌ICP备20251104号</a>
     </div>
  
@@ -994,18 +1243,6 @@ refresh_blog_running_time();
 	
 
 <script type="speculationrules">{"prefetch":[{"source":"document","where":{"and":[{"href_matches":"\/myblog\/*"},{"not":{"href_matches":["\/myblog\/wp-*.php","\/myblog\/wp-admin\/*","\/myblog\/wp-content\/uploads\/*","\/myblog\/wp-content\/*","\/myblog\/wp-content\/plugins\/*","\/myblog\/wp-content\/themes\/argon\/*","\/myblog\/*\\?(.+)"]}},{"not":{"selector_matches":"a[rel~=\"nofollow\"]"}},{"not":{"selector_matches":".no-prefetch, .no-prefetch a"}}]},"eagerness":"conservative"}]}</script>
-<script type="text/javascript" id="disqus_count-js-extra">
-/* <![CDATA[ */
-var countVars = {"disqusShortname":"noah-9"};
-/* ]]> */
-</script>
-<script type="text/javascript" src="https://rona.eu.org/wp-content/plugins/disqus-comment-system/public/js/comment_count.js?ver=3.1.2" id="disqus_count-js"></script>
-<script type="text/javascript" id="disqus_embed-js-extra">
-/* <![CDATA[ */
-var embedVars = {"disqusConfig":{"integration":"wordpress 3.1.2"},"disqusIdentifier":"100 http:\/\/localhost\/myblog\/?p=100","disqusShortname":"noah-9","disqusTitle":"diary-220720","disqusUrl":"http:\/\/localhost\/myblog\/2022\/07\/20\/diary-220720\/","postId":"100"};
-/* ]]> */
-</script>
-<script type="text/javascript" src="https://rona.eu.org/wp-content/plugins/disqus-comment-system/public/js/comment_embed.js?ver=3.1.2" id="disqus_embed-js"></script>
 <script type="text/javascript" id="superpwa-register-sw-js-extra">
 /* <![CDATA[ */
 var superpwa_sw = {"url":"\/myblog\/superpwa-sw.js?2.2.36","disable_addtohome":"0","enableOnDesktop":"","offline_form_addon_active":"","ajax_url":"http:\/\/localhost\/myblog\/wp-admin\/admin-ajax.php","offline_message":"1","offline_message_txt":"You are currently offline."};
